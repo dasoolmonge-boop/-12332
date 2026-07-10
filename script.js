@@ -69,6 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const TELEGRAM_CHAT_ID = '-5540358191'; // Chat ID for Монге & Долаан Оснавной, Приглашения
 
     if (contactForm) {
+        // Init IMask for phone
+        const phoneInput = document.getElementById('phone');
+        if (phoneInput && window.IMask) {
+            IMask(phoneInput, {
+                mask: '+{7} (000) 000-00-00'
+            });
+        }
+
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
