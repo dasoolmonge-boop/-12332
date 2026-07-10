@@ -133,8 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Reset display inline so it can be shown again with class toggle
                     setTimeout(() => formStatus.style.display = '', 100);
                 }, 5000);
-                
-            }, 1500);
+            }
         });
     }
 
