@@ -23,7 +23,7 @@
 
 html {
     scroll-behavior: smooth;
-    background-color: #000; /* For desktop viewing to frame the app */
+    background-color: var(--bg-light);
 }
 
 body {
@@ -32,8 +32,8 @@ body {
     background-color: var(--bg-light);
     line-height: 1.6;
     overflow-x: hidden;
-    /* STRICTLY MOBILE */
-    max-width: 480px;
+    /* Responsive fluid */
+    width: 100%;
     margin: 0 auto;
     position: relative;
     box-shadow: 0 0 30px rgba(255,255,255,0.1);
@@ -116,10 +116,9 @@ ul {
 .header {
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    transform: none;
     width: 100%;
-    max-width: 480px;
     z-index: 1000;
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
