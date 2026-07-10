@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 
     // 5. Form Validation & Telegram Bot
-    const contactForm = document.getElementById('contact-form');
-    const formStatus = document.getElementById('form-status');
+    const contactForm = document.getElementById('leadForm');
+    const formStatus = document.getElementById('formStatus');
     const TELEGRAM_TOKEN = '8334443770:AAFCWnMi4CuIvk7b06NPbH4Wt943IUZGIBE';
     const TELEGRAM_CHAT_ID = '-5540358191'; // Chat ID for Монге & Долаан Оснавной, Приглашения
 
@@ -74,11 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email') ? document.getElementById('email').value : 'Нет email';
             const message = document.getElementById('message').value || 'Нет сообщения';
             
             if (name && phone) {
                 // Formatting message for Telegram
-                const text = `🔥 Новая заявка с сайта!\n\nИмя: ${name}\nТелефон: ${phone}\nСообщение: ${message}`;
+                const text = `🔥 Новая заявка с сайта!\n\nИмя: ${name}\nТелефон: ${phone}\nEmail: ${email}\nСообщение: ${message}`;
                 
                 // Show loading state
                 const submitBtn = contactForm.querySelector('button[type="submit"]');
