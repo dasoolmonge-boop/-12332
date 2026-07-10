@@ -62,40 +62,71 @@ document.addEventListener('DOMContentLoaded', () => {
         heroElements.forEach(el => el.classList.add('visible'));
     }, 100);
 
-    // 4. Form Submission Handling
-    const leadForm = document.getElementById('leadForm');
-    const formStatus = document.getElementById('formStatus');
+    // 5. Form Validation & Telegram Bot
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+    const TELEGRAM_TOKEN = '8334443770:AAFCWnMi4CuIvk7b06NPbH4Wt943IUZGIBE';
+    const TELEGRAM_CHAT_ID = '-5540358191'; // Chat ID for Монге & Долаан Оснавной, Приглашения
 
-    if (leadForm) {
-        leadForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent actual form submission
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Basic validation check
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value || 'Нет сообщения';
+            
+            if (name && phone) {
+                // Formatting message for Telegram
+                const text = `🔥 Новая заявка с сайта!\n\nИмя: ${name}\nТелефон: ${phone}\nСообщение: ${message}`;
+                
+                // Show loading state
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.textContent = 'Отправка...';
+                submitBtn.disabled = true;
 
-            if (!name || !phone || !email) {
+                // Send to Telegram
+                fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: text
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        formStatus.style.display = 'block';
+                        formStatus.textContent = 'Спасибо за заявку! Мы свяжемся с вами в ближайшее время.';
+                        formStatus.className = 'form-status success';
+                        contactForm.reset();
+                    } else {
+                        formStatus.style.display = 'block';
+                        formStatus.textContent = 'Ошибка при отправке. Пожалуйста, попробуйте позже.';
+                        formStatus.className = 'form-status error';
+                    }
+                })
+                .catch(error => {
+                    formStatus.style.display = 'block';
+                    formStatus.textContent = 'Ошибка сети. Пожалуйста, проверьте подключение.';
+                    formStatus.className = 'form-status error';
+                })
+                .finally(() => {
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                    
+                    setTimeout(() => {
+                        formStatus.style.display = 'none';
+                        formStatus.className = 'form-status';
+                    }, 5000);
+                });
+            } else {
+                formStatus.style.display = 'block';
+                formStatus.textContent = 'Пожалуйста, заполните обязательные поля.';
                 formStatus.className = 'form-status error';
-                formStatus.textContent = 'Пожалуйста, заполните все обязательные поля.';
-                return;
-            }
-
-            // Simulate API request
-            const submitBtn = leadForm.querySelector('.btn-submit');
-            const originalBtnText = submitBtn.textContent;
-            submitBtn.textContent = 'Отправка...';
-            submitBtn.disabled = true;
-
-            setTimeout(() => {
-                formStatus.className = 'form-status success';
-                formStatus.textContent = 'Спасибо! Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.';
-                
-                // Reset form and button
-                leadForm.reset();
-                submitBtn.textContent = originalBtnText;
-                submitBtn.disabled = false;
-                
                 // Hide message after 5 seconds
                 setTimeout(() => {
                     formStatus.style.display = 'none';
