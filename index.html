@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 
@@ -245,6 +245,12 @@
                             <label for="message">Комментарий или вопрос</label>
                             <textarea id="message" name="message" rows="4" placeholder="Интересует смена в детском лагере..."></textarea>
                         </div>
+                        <div class="form-group checkbox-group" style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px;">
+                            <input type="checkbox" id="consent" name="consent" required style="width: auto; margin-top: 4px;">
+                            <label for="consent" style="font-size: 0.8rem; font-weight: 400; color: var(--text-muted); line-height: 1.4;">
+                                Я даю согласие на обработку моих персональных данных в соответствии с <a href="privacy.html" target="_blank" style="color: var(--accent); text-decoration: underline;">Политикой конфиденциальности</a> (ФЗ №152).
+                            </label>
+                        </div>
                         <button type="submit" class="btn btn-primary btn-submit">Отправить заявку</button>
                         <div class="form-status" id="formStatus"></div>
                     </form>
@@ -268,8 +274,9 @@
                 </ul>
             </div>
             <div class="footer-copy">
-                <p>&copy; 2005 - 2026 БФ «Ратники Отечества».</p>
-                <p>Все права защищены.</p>
+                <p>&copy; 2005 - 2026 Благотворительный фонд «Ратники Отечества».</p>
+                <p><a href="privacy.html" style="color: var(--accent); text-decoration: underline;">Политика конфиденциальности</a></p>
+                <p style="font-size: 0.7rem; color: #666; margin-top: 10px;">Сайт носит информационный характер и не является публичной офертой.</p>
             </div>
         </div>
     </footer>
