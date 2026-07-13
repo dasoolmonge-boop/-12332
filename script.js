@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. Initialize Swiper Gallery
     if (typeof Swiper !== 'undefined') {
-        const swiper = new Swiper('.gallery-swiper', {
+        const gallerySwiper = new Swiper('.gallery-swiper', {
             slidesPerView: 1,
             spaceBetween: 20,
             loop: true,
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 disableOnInteraction: false,
             },
             pagination: {
-                el: '.swiper-pagination',
+                el: '.gallery-swiper .swiper-pagination',
                 clickable: true,
             },
             navigation: {
@@ -195,6 +195,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     slidesPerView: 3,
                     spaceBetween: 30,
                 }
+            }
+        });
+        
+        // 7. Initialize Leaders Swiper
+        const leadersSwiper = new Swiper('.leaders-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.leaders-swiper .swiper-pagination',
+                clickable: true,
             }
         });
     }
