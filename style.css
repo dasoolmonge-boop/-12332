@@ -447,10 +447,14 @@ ul {
     padding-bottom: 40px;
 }
 
-.swiper-slide {
+.gallery-swiper .swiper-slide {
     border-radius: 8px;
     overflow: hidden;
     height: 250px;
+}
+
+.leaders-swiper .swiper-slide {
+    height: auto; /* Allow height to adapt to content */
 }
 
 .swiper-slide img {
